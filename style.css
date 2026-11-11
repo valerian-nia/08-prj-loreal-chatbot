@@ -1,113 +1,191 @@
-/* —— basic reset —— */
+/* Keep spacing and sizing predictable across the page. */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
+/* A warm white background and dark text keep the page quiet and premium. */
 body {
+  min-height: 100vh;
+  background: #f8f7f5;
+  color: #171717;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
   display: flex;
   justify-content: center;
 }
 
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  width: min(100% - 48px, 920px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* header */
+/* The logo leads the header, with the title and short introduction below. */
 .site-header {
+  padding: 48px 0 34px;
   text-align: center;
-  padding-top: 50px;
+}
+
+.brand-logo {
+  display: block;
+  width: min(280px, 72vw);
+  height: auto;
+  margin: 0 auto 30px;
+}
+
+.brand-label {
+  margin-bottom: 12px;
+  color: #8a7966;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
 }
 
 .site-title {
-  font-size: 22px;
+  font-size: clamp(26px, 4vw, 36px);
   font-weight: 500;
-  margin-bottom: 10px;
+  letter-spacing: -0.04em;
 }
 
-/* chat window */
+.site-subtitle {
+  max-width: 600px;
+  margin: 14px auto 0;
+  color: #68635e;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+main {
+  flex: 1;
+}
+
+/* A simple bordered chat panel keeps attention on the conversation. */
 .chatbox {
-  margin: 40px 0;
+  margin: 0 0 42px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #e8e4df;
+  box-shadow: 0 14px 40px rgb(34 28 22 / 5%);
 }
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px;
   overflow-y: auto;
-  background: #fafafa;
-  white-space: pre-line;
+  background: #fcfbfa;
+  color: #34312e;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-/* messages */
-.msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
+/* Keep each labeled message aligned and comfortably readable. */
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 82%;
 }
 
-.msg.user {
-  color: #000;
+.chat-message.user {
+  align-self: flex-end;
+  align-items: flex-end;
 }
 
-.msg.ai {
-  color: #666666;
+.chat-label {
+  margin: 0 0 5px 4px;
+  color: #8a7966;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
-/* input row */
+.chat-message.user .chat-label {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+.chat-bubble {
+  max-width: 100%;
+  padding: 11px 15px;
+  border: 1px solid #e8e4df;
+  background: #fff;
+  color: #34312e;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.chat-message.user .chat-bubble {
+  border-color: #171717;
+  background: #171717;
+  color: #fff;
+}
+
+.chat-message.assistant .chat-bubble {
+  background: #f3f0ec;
+  color: #514a43;
+}
+
 .chat-form {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .chat-form input {
+  min-width: 0;
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  padding: 14px 16px;
+  border: 1px solid #ded9d3;
+  border-radius: 0;
+  background: #fff;
+  color: #171717;
+  font: inherit;
+  font-size: 15px;
+}
+
+.chat-form input::placeholder {
+  color: #8a8580;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #8a7966;
   outline-offset: 2px;
 }
 
 .chat-form button {
-  font-size: 18px;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0;
+  background: #171717;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.2s ease;
 }
 
 .chat-form button .material-icons {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #665748;
 }
 
-.chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+.chat-form button:focus-visible {
+  outline: 2px solid #8a7966;
+  outline-offset: 3px;
 }
 
-/* visually hidden */
+/* Screen-reader text stays available without taking up visual space. */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -120,24 +198,69 @@ body {
   border: 0;
 }
 
-/* footer */
 .site-footer {
-  margin: 60px 0 40px;
+  padding: 20px 0 28px;
+  border-top: 1px solid #e8e4df;
+  color: #77716b;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  font-size: 12px;
 }
 
 .site-footer nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
   margin-top: 12px;
 }
 
 .site-footer a {
-  margin: 0 8px;
-  color: #000;
+  color: #514a43;
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: #171717;
+  text-decoration: underline;
+}
+
+/* Give the chat more room and tighten the header on narrow screens. */
+@media (max-width: 600px) {
+  .page-wrapper {
+    width: min(100% - 28px, 920px);
+  }
+
+  .site-header {
+    padding: 34px 0 26px;
+  }
+
+  .brand-logo {
+    margin-bottom: 24px;
+  }
+
+  .site-subtitle {
+    max-width: 420px;
+    font-size: 14px;
+  }
+
+  .chatbox {
+    margin-bottom: 28px;
+    padding: 8px;
+  }
+
+  .chat-window {
+    height: min(50vh, 360px);
+    min-height: 250px;
+    padding: 16px;
+    font-size: 15px;
+  }
+
+  .chat-form {
+    gap: 8px;
+  }
+
+  .chat-form input {
+    padding: 12px;
+    font-size: 14px;
+  }
 }
